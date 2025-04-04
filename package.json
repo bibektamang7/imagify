@@ -1,5 +1,5 @@
 {
-  "name": "Imagify",
+  "name": "imagify",
   "private": true,
   "scripts": {
     "build": "turbo run build",
