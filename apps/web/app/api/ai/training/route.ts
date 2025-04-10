@@ -1,8 +1,11 @@
 import { prismaClient } from "db";
 import { NextRequest, NextResponse } from "next/server";
 import { TrainModel } from "validation/types";
+import { FalAIModel } from "../../../../lib/FalAiModel";
 
-export async function GET(request: NextRequest) {
+const falAiModel = new FalAIModel();
+
+export async function POST(request: NextRequest) {
 	const trainingData = await request.json();
 	const parsedData = TrainModel.safeParse(trainingData);
 
@@ -13,8 +16,14 @@ export async function GET(request: NextRequest) {
 		);
 	}
 
+	const { request_id } = await falAiModel.trainModel(
+		parsedData.data.zipUrl,
+		parsedData.data.name
+	);
+
 	const model = await prismaClient.model.create({
 		data: {
+			falAiRequestId: request_id,
 			userId: trainingData.userId,
 			...parsedData.data,
 		},
