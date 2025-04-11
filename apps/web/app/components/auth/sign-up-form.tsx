@@ -1,52 +1,45 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-// import { useAuth } from "@/context/auth-context"
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export function SignUpForm() {
 	const router = useRouter();
 	const isLoading = false;
-	//   const { signUp, isLoading } = useAuth()
+	const { signUpUser } = useAuth();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [error, setError] = useState("");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		setError("");
 
-		if (!email || !password || !confirmPassword) {
-			setError("Please fill in all fields");
-			return;
-		}
-
-		if (password !== confirmPassword) {
-			setError("Passwords do not match");
+		if (!email || !password) {
+			toast("Please fill in all fields");
 			return;
 		}
 
 		if (password.length < 8) {
-			setError("Password must be at least 8 characters");
+			toast("Password must be at least 8 characters");
 			return;
 		}
 
-		// try {
-		//   const success = await signUp(name, email, password)
-		//   if (success) {
-		//     router.push("/dashboard")
-		//   }
-		// } catch (err) {
-		//   setError("An error occurred. Please try again.")
-		// }
+		try {
+			const signUpResponse = await signUpUser(email, password);
+			if (signUpResponse.ok || signUpResponse.success) {
+				router.push("/dashboard");
+			}
+		} catch (err) {
+			toast("An error occurred. Please try again.");
+		}
 	};
 
 	return (
@@ -81,21 +74,6 @@ export function SignUpForm() {
 							required
 						/>
 					</div>
-
-					<div className="space-y-2">
-						<Label htmlFor="confirmPassword">Confirm Password</Label>
-						<Input
-							id="confirmPassword"
-							type="password"
-							placeholder="••••••••"
-							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
-							className="bg-gray-800 border-gray-700"
-							required
-						/>
-					</div>
-
-					{error && <p className="text-red-500 text-sm">{error}</p>}
 
 					<Button
 						type="submit"

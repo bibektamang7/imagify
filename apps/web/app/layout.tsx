@@ -2,6 +2,8 @@ import type React from "react";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import AuthProvider from "./context/AuthContext";
+import { Toaster } from "./components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -88,7 +90,10 @@ export default function RootLayout({
 			lang="en"
 			suppressHydrationWarning
 		>
-			<body className={`${inter.className} text-white`}>{children}</body>
+			<body className={`${inter.className} text-white`}>
+				<AuthProvider>{children}</AuthProvider>
+				<Toaster />
+			</body>
 		</html>
 	);
 }

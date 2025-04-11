@@ -3,40 +3,35 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-// import { useAuth } from "@/context/auth-context"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 
 export function SignInForm() {
 	const router = useRouter();
-	//   const { signIn, isLoading } = useAuth()
+	const { loginUser } = useAuth();
 	const isLoading = false;
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		setError("");
 
 		if (!email || !password) {
-			setError("Please fill in all fields");
+			toast("Please fill in all fields");
 			return;
 		}
 
-		// try {
-		//   const success = await signIn(email, password)
-		//   if (success) {
-		//     router.push("/dashboard")
-		//   } else {
-		//     setError("Invalid email or password")
-		//   }
-		// } catch (err) {
-		//   setError("An error occurred. Please try again.")
-		// }
+		const loginResponse = await loginUser(email, password);
+		if (loginResponse.ok || loginResponse.success) {
+			router.push("/dashboard");
+		} else {
+			toast("Invalid email or password");
+		}
 	};
 
 	return (
@@ -78,8 +73,6 @@ export function SignInForm() {
 							required
 						/>
 					</div>
-
-					{error && <p className="text-red-500 text-sm">{error}</p>}
 
 					<Button
 						type="submit"

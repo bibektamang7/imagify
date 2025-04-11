@@ -2,7 +2,7 @@ import { prismaClient } from "db";
 import { NextResponse } from "next/server";
 import { SignUpSchema } from "validation/types";
 import bcrypt from "bcryptjs";
-import { generateAccessAndRefreshToken } from "../../../lib/generateToken";
+import { generateAccessAndRefreshToken } from "@/lib/generateToken";
 
 export async function POST(request: Request) {
 	try {
@@ -32,7 +32,8 @@ export async function POST(request: Request) {
 
 		const createdUser = await prismaClient.user.create({
 			data: {
-				...parsedData.data,
+				password: hashPassword,
+				email: parsedData.data.email,
 			},
 		});
 
@@ -50,7 +51,16 @@ export async function POST(request: Request) {
 		//TODO: store refreshToken in the database
 
 		const response = NextResponse.json(
-			{ success: true, message: "Registered Successfull" },
+			{
+				success: true,
+				message: "Registered Successfull",
+				data: {
+					user: {
+						email: createdUser.email,
+						userId: createdUser.id,
+					},
+				},
+			},
 			{ status: 200 }
 		);
 

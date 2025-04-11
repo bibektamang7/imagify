@@ -2,13 +2,13 @@ import bcrypt from "bcryptjs";
 import { prismaClient } from "db";
 import { NextResponse } from "next/server";
 import { SignInSchema } from "validation/types";
-import { generateAccessAndRefreshToken } from "../../../lib/generateToken";
+import { generateAccessAndRefreshToken } from "@/lib/generateToken";
 
 const isPasswordCorrect = async (password: string, hashPassword: string) => {
 	return await bcrypt.compare(password, hashPassword);
 };
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
 	try {
 		const requestData = await request.json();
 		const parsedData = SignInSchema.safeParse(requestData);
@@ -48,7 +48,16 @@ export async function GET(request: Request) {
 		);
 
 		const response = NextResponse.json(
-			{ success: true, message: "Login Successfull" },
+			{
+				success: true,
+				message: "Login Successfull",
+				data: {
+					user: {
+						email: user.email,
+						id: user.id,
+					},
+				},
+			},
 			{ status: 200 }
 		);
 
