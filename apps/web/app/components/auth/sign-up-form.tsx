@@ -15,7 +15,6 @@ export function SignUpForm() {
 	const router = useRouter();
 	const isLoading = false;
 	//   const { signUp, isLoading } = useAuth()
-	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,7 +24,7 @@ export function SignUpForm() {
 		e.preventDefault();
 		setError("");
 
-		if (!name || !email || !password || !confirmPassword) {
+		if (!email || !password || !confirmPassword) {
 			setError("Please fill in all fields");
 			return;
 		}
@@ -57,19 +56,6 @@ export function SignUpForm() {
 					onSubmit={handleSubmit}
 					className="space-y-4"
 				>
-					<div className="space-y-2">
-						<Label htmlFor="name">Full Name</Label>
-						<Input
-							id="name"
-							type="text"
-							placeholder="John Doe"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							className="bg-gray-800 border-gray-700"
-							required
-						/>
-					</div>
-
 					<div className="space-y-2">
 						<Label htmlFor="email">Email</Label>
 						<Input

@@ -53,8 +53,8 @@ const Header = () => {
 					>
 						Sign in
 					</Link>
-					<Link href="/generate">
-						<Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg shadow-purple-900/20">
+					<Link href="/sign-up">
+						<Button className="hover:cursor-pointer bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg shadow-purple-900/20">
 							Get Started
 						</Button>
 					</Link>

@@ -88,7 +88,7 @@ export default function RootLayout({
 			lang="en"
 			suppressHydrationWarning
 		>
-			<body className={inter.className}>{children}</body>
+			<body className={`${inter.className} text-white`}>{children}</body>
 		</html>
 	);
 }

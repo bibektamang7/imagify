@@ -3,9 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
-	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
@@ -13,8 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import {
 	ArrowRight,
 	Download,
-	Sparkles,
-	Check,
 	Zap,
 	Shield,
 	Palette,
@@ -57,8 +53,8 @@ export default function Home() {
 	return (
 		<>
 			<WebsiteStructuredData />
-			<OrganizationStructuredData />
-			<SoftwareApplicationStructuredData />
+			{/* <OrganizationStructuredData />
+			<SoftwareApplicationStructuredData /> */}
 
 			<div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
 				<Header />
@@ -454,7 +450,6 @@ export default function Home() {
 						</div>
 					</section>
 				</main>
-		
 			</div>
 		</>
 	);
