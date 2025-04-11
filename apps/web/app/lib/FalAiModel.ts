@@ -1,4 +1,4 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "../app/lib/BaseModel";
 import { fal } from "@fal-ai/client";
 
 export class FalAIModel extends BaseModel {

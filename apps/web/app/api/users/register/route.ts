@@ -2,7 +2,7 @@ import { prismaClient } from "db";
 import { NextResponse } from "next/server";
 import { SignUpSchema } from "validation/types";
 import bcrypt from "bcryptjs";
-import { generateAccessAndRefreshToken } from "../../../../lib/generateToken";
+import { generateAccessAndRefreshToken } from "../../../lib/generateToken";
 
 export async function POST(request: Request) {
 	try {

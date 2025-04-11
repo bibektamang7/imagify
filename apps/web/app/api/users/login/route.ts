@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { prismaClient } from "db";
 import { NextResponse } from "next/server";
 import { SignInSchema } from "validation/types";
-import { generateAccessAndRefreshToken } from "../../../../lib/generateToken";
+import { generateAccessAndRefreshToken } from "../../../lib/generateToken";
 
 const isPasswordCorrect = async (password: string, hashPassword: string) => {
 	return await bcrypt.compare(password, hashPassword);
