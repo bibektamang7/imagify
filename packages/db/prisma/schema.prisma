@@ -57,6 +57,15 @@ enum OutputImageStatusEnum {
   Failed
 }
 
+enum TagEnum {
+  Professional
+  Artistic
+  Anime
+  Fashion
+  Fantasy
+  Other
+}
+
 model OutputImages {
   id             String                @id @default(uuid())
   imageUrl       String                @default("")
@@ -68,6 +77,8 @@ model OutputImages {
   model          Model                 @relation(fields: [modelId], references: [id])
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
+  isDownloaded   Boolean               @default(false)
+  tag            TagEnum               @default(Other)
 
   @@index([falAiRequestId])
 }
