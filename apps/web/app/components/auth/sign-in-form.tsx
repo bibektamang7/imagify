@@ -14,12 +14,13 @@ import { toast } from "sonner";
 export function SignInForm() {
 	const router = useRouter();
 	const { loginUser } = useAuth();
-	const isLoading = false;
+	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		if (!email || !password) {
 			toast("Please fill in all fields");
@@ -32,6 +33,7 @@ export function SignInForm() {
 		} else {
 			toast("Invalid email or password");
 		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -87,12 +89,6 @@ export function SignInForm() {
 							"Sign in"
 						)}
 					</Button>
-
-					<div className="text-center text-xs text-gray-500 mt-4">
-						<p>Demo credentials:</p>
-						<p>Email: demo@example.com</p>
-						<p>Password: password</p>
-					</div>
 				</form>
 			</CardContent>
 		</Card>

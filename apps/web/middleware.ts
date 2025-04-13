@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-	console.log("🔒 Middleware triggered");
-
 	const token = request.cookies.get("accessToken")?.value;
 	const { pathname } = request.nextUrl;
 
 	const authorizedApiRoute = ["/api/v1/users/login", "/api/v1/users/sign-up"];
 
+	if (pathname.startsWith("/dashboard")) {
+		console.log(token);
+		console.log(request.cookies);
+	}
 	if (
 		pathname.startsWith("/api") &&
 		!authorizedApiRoute.some((route) => pathname.startsWith(route)) &&
@@ -21,7 +23,7 @@ export function middleware(request: NextRequest) {
 		return NextResponse.redirect(new URL("/sign-in", request.url));
 	}
 
-	if (token && ["/", "/sign-in"].some((route) => pathname === route)) {
+	if (token && pathname.startsWith("/sign-in")) {
 		return NextResponse.redirect(new URL("/dashboard", request.url));
 	}
 

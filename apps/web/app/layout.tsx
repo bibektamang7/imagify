@@ -88,7 +88,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			suppressHydrationWarning
+			suppressHydrationWarning={true}
 		>
 			<body className={`${inter.className} text-white`}>
 				<AuthProvider>{children}</AuthProvider>

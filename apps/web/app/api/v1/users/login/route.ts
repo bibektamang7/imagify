@@ -63,7 +63,7 @@ export async function POST(request: Request) {
 
 		response.headers.set(
 			"Set-Cookie",
-			`accessToken=${accessToken}; HttpOnly; Secure;`
+			`accessToken=${accessToken}; HttpOnly; Path=/;`
 		);
 		return response;
 	} catch (error: any) {

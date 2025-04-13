@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSignedUrlForUpload, uploadFile } from "../../lib/r2";
+import { getSignedUrlForUpload } from "@/lib/r2";
 
 export async function GET(request: NextRequest) {
 	const key = `models/${Date.now()}_${Math.random()}.zip`;

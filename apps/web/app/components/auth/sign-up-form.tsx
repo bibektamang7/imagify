@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 export function SignUpForm() {
 	const router = useRouter();
-	const isLoading = false;
+	const [isLoading, setIsLoading] = useState(false);
 	const { signUpUser } = useAuth();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -21,6 +21,7 @@ export function SignUpForm() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		if (!email || !password) {
 			toast("Please fill in all fields");
@@ -40,6 +41,7 @@ export function SignUpForm() {
 		} catch (err) {
 			toast("An error occurred. Please try again.");
 		}
+		setIsLoading(false);
 	};
 
 	return (
