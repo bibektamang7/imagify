@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 // import { useAuth } from "@/context/auth-context"
 import {
@@ -17,6 +15,7 @@ import { RecentPortraits } from "@/components/dashboard/recent-portraits";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { ArrowRight, Sparkles, Wand2 } from "lucide-react";
 import Link from "next/link";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function DashboardPage() {
 	const router = useRouter();
@@ -34,7 +33,7 @@ export default function DashboardPage() {
 	// }
 
 	return (
-		<div className="space-y-8">
+		<ScrollArea className="space-y-8">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
 				{/* <p className="text-gray-500">Welcome back, {user.name}!</p> */}
@@ -145,7 +144,7 @@ export default function DashboardPage() {
 							</div>
 						</div>
 						<Link
-							href="/dashboard/text-to-image"
+							href="/dashboard/prompt"
 							className="sm:ml-auto"
 						>
 							<Button className="gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
@@ -186,6 +185,6 @@ export default function DashboardPage() {
 					</div>
 				</CardContent>
 			</Card>
-		</div>
+		</ScrollArea>
 	);
 }

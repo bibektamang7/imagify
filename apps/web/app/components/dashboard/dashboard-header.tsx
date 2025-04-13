@@ -40,7 +40,7 @@ export function DashboardHeader() {
 		<header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-sm px-4 md:px-6 lg:px-8">
 			<div className="flex flex-1 items-center justify-end">
 				<div className="flex items-center gap-4">
-					<Link href="/generate">
+					<Link href="/dashboard/generate">
 						<Button className="gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
 							<Plus className="h-4 w-4" /> New Portrait
 						</Button>

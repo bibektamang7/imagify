@@ -38,8 +38,8 @@ const navItems: NavItem[] = [
 		icon: <ImageIcon className="h-4 w-4" />,
 	},
 	{
-		title: "Text to Image",
-		href: "/dashboard/text-to-image",
+		title: "Prompt",
+		href: "/dashboard/prompt",
 		icon: <Sparkles className="h-4 w-4" />,
 	},
 	{
@@ -135,8 +135,8 @@ export function DashboardNav() {
 			</Sheet>
 
 			{/* Desktop Navigation */}
-			<div className="hidden lg:flex flex-col w-64 border-r border-gray-800 bg-gray-900/50 backdrop-blur-sm">
-				<div className="p-6 border-b border-gray-800">
+			<div className="hidden lg:flex flex-col w-64 border-r border-gray-800 bg-gray-900/50 backdrop-blur-sm lg:max-h-screen">
+				<div className="px-6 py-4! border-b border-gray-800">
 					<Link
 						href="/"
 						className="flex items-center gap-2 font-bold text-xl"
@@ -149,13 +149,6 @@ export function DashboardNav() {
 				</div>
 				<ScrollArea className="flex-1 py-6">
 					<nav className="grid gap-2 px-4">
-						<Link
-							href="/"
-							className="flex items-center gap-2 text-gray-400 hover:text-white px-3 py-2 rounded-md hover:bg-gray-800 transition-colors"
-						>
-							<Home className="h-4 w-4" />
-							<span>Home</span>
-						</Link>
 						{navItems.map((item) => (
 							<Link
 								key={item.href}
