@@ -31,17 +31,17 @@ export const metadata: Metadata = {
 	description:
 		"Create stunning AI portraits in seconds. Upload your photo and get 50+ professional portraits in different styles with our advanced AI technology.",
 	openGraph: {
-		title: "PhotoAI - Transform Your Photos with AI",
+		title: "Imagify - Transform Your Photos with AI",
 		description:
 			"Create stunning AI portraits in seconds. Upload your photo and get 50+ professional portraits in different styles.",
-		url: "https://photoai.example.com",
-		siteName: "PhotoAI",
+		url: "https://imagify.example.com",
+		siteName: "Imagify",
 		images: [
 			{
-				url: "https://photoai.example.com/og-image.jpg",
+				url: "https://imagify.example.com/og-image.jpg",
 				width: 1200,
 				height: 630,
-				alt: "PhotoAI - AI Portrait Generator",
+				alt: "Imagify - AI Portrait Generator",
 			},
 		],
 		locale: "en_US",
@@ -320,7 +320,7 @@ export default function Home() {
 										id="examples-heading"
 										className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
 									>
-										See What PhotoAI Can Create
+										See What Imagify Can Create
 									</h2>
 									<p className="max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
 										Browse through our gallery of AI-generated portraits in
@@ -432,7 +432,7 @@ export default function Home() {
 								</h2>
 								<p className="mx-auto max-w-[700px] text-gray-400 md:text-xl/relaxed">
 									Join thousands of users creating stunning AI portraits with
-									PhotoAI
+								Imagify	
 								</p>
 								<Link href="/generate">
 									<Button

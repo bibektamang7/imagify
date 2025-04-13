@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: {
-		default: "PhotoAI - AI Portrait Generator | Transform Your Photos with AI",
-		template: "%s | PhotoAI",
+		default: "Imagify - AI Portrait Generator | Transform Your Photos with AI",
+		template: "%s | Imagify",
 	},
 	description:
 		"Transform your ordinary photos into stunning AI portraits with 50+ professional styles. Create LinkedIn headshots, artistic portraits, and more in seconds.",
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
 		"AI photo generator",
 		"portrait generator",
 	],
-	authors: [{ name: "PhotoAI" }],
-	creator: "PhotoAI",
-	publisher: "PhotoAI",
+	authors: [{ name: "Imagify" }],
+	creator: "Imagify",
+	publisher: "Imagify",
 	formatDetection: {
 		email: false,
 		address: false,
 		telephone: false,
 	},
-	metadataBase: new URL("https://photoai.example.com"),
+	metadataBase: new URL("https://imagify.example.com"),
 	alternates: {
 		canonical: "/",
 		languages: {
@@ -39,17 +39,17 @@ export const metadata: Metadata = {
 		},
 	},
 	openGraph: {
-		title: "PhotoAI - Transform Your Photos with AI",
+		title: "Imagify - Transform Your Photos with AI",
 		description:
 			"Create stunning AI portraits in seconds. Upload your photo and get 50+ professional portraits in different styles.",
-		url: "https://photoai.example.com",
-		siteName: "PhotoAI",
+		url: "https://imagify.example.com",
+		siteName: "Imagify",
 		images: [
 			{
-				url: "https://photoai.example.com/og-image.jpg",
+				url: "https://imagify.example.com/og-image.jpg",
 				width: 1200,
 				height: 630,
-				alt: "PhotoAI - AI Portrait Generator",
+				alt: "Imagify - AI Portrait Generator",
 			},
 		],
 		locale: "en_US",
@@ -57,11 +57,11 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "PhotoAI - Transform Your Photos with AI",
+		title: "Imagify - Transform Your Photos with AI",
 		description:
 			"Create stunning AI portraits in seconds. Upload your photo and get 50+ professional portraits in different styles.",
-		images: ["https://photoai.example.com/twitter-image.jpg"],
-		creator: "@photoai",
+		images: ["https://imagify.example.com/twitter-image.jpg"],
+		creator: "@imagify",
 	},
 	robots: {
 		index: true,

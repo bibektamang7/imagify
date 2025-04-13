@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 
 export const metadata = {
-  title: "Page Not Found | PhotoAI",
+  title: "Page Not Found | Imagify",
   description: "The page you are looking for does not exist.",
   robots: {
     index: false,

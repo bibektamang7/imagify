@@ -96,7 +96,7 @@ export function DashboardNav() {
 							>
 								<Sparkles className="h-6 w-6 text-purple-400" />
 								<span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-									PhotoAI
+									Imagify
 								</span>
 							</Link>
 						</div>
@@ -143,7 +143,7 @@ export function DashboardNav() {
 					>
 						<Sparkles className="h-6 w-6 text-purple-400" />
 						<span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-							PhotoAI
+							Imagify
 						</span>
 					</Link>
 				</div>

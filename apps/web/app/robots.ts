@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: "/",
 			disallow: ["/generate/results", "/api/"],
 		},
-		sitemap: "https://photoai.example.com/sitemap.xml",
+		sitemap: "https://imagify.example.com/sitemap.xml",
 	};
 }

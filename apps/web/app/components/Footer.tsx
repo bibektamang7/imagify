@@ -14,11 +14,11 @@ const Footer = () => {
 						aria-hidden="true"
 					/>
 					<span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-						PhotoAI
+						Imagify
 					</span>
 				</div>
 				<p className="text-center text-sm text-gray-500 md:text-left">
-					© 2025 PhotoAI. All rights reserved.
+					© 2025 Imagify. All rights reserved.
 				</p>
 				<nav
 					className="flex gap-4 md:ml-auto md:gap-6"

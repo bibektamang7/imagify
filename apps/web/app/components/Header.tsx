@@ -13,14 +13,14 @@ const Header = () => {
 				<Link
 					href="/"
 					className="flex items-center gap-2 font-bold text-xl"
-					aria-label="PhotoAI Home"
+					aria-label="Imagify Home"
 				>
 					<Sparkles
 						className="h-6 w-6 text-purple-400"
 						aria-hidden="true"
 					/>
 					<span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-						PhotoAI
+						Imagify
 					</span>
 				</Link>
 				<nav
