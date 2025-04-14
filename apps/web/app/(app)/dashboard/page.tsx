@@ -1,6 +1,4 @@
-"use client";
-import { useRouter } from "next/navigation";
-// import { useAuth } from "@/context/auth-context"
+import { prismaClient } from "db";
 import {
 	Card,
 	CardContent,
@@ -13,47 +11,70 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { RecentPortraits } from "@/components/dashboard/recent-portraits";
 import { StatsCards } from "@/components/dashboard/stats-cards";
-import { ArrowRight, Sparkles, Wand2 } from "lucide-react";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getUserFromToken } from "@/lib/auth";
 
-export default function DashboardPage() {
-	const router = useRouter();
-	const isLoading = false;
-	//   const { user, isLoading } = useAuth()
+const DashboardPage = async () => {
+	const decodedUser = await getUserFromToken();
+	const user = await prismaClient.user.findUnique({
+		where: {
+			id: decodedUser?.id,
+		},
+		select: {
+			id: true,
+			email: true,
+		},
+	});
 
-	// useEffect(() => {
-	// 	if (!isLoading && !user) {
-	// 		router.push("/sign-in");
-	// 	}
-	// }, [user, isLoading, router]);
+	const outputImages = await prismaClient.outputImages.findMany({
+		where: {
+			userId: user?.id,
+		},
+	});
 
-	// if (isLoading || !user) {
-	// 	return null;
-	// }
+	const totalDownloads = outputImages.filter(
+		(image) => image.isDownloaded === true
+	);
+	//TODO: Login to find favorite style
 
 	return (
 		<ScrollArea className="space-y-8">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-				{/* <p className="text-gray-500">Welcome back, {user.name}!</p> */}
 			</div>
 
-			<StatsCards />
+			<StatsCards
+				totalDownloads={totalDownloads.length}
+				totalPortraits={outputImages.length}
+				remainingCredits={0}
+				favoriteStyle="none"
+				numberOfFavoriteStyle={0}
+			/>
 
 			<Tabs
 				defaultValue="recent"
 				className="space-y-4"
 			>
-				<TabsList>
-					<TabsTrigger value="recent">Recent Portraits</TabsTrigger>
-					<TabsTrigger value="popular">Popular Styles</TabsTrigger>
+				<TabsList className="mt-4">
+					<TabsTrigger
+						value="recent"
+						className="hover:cursor-pointer"
+					>
+						Recent Portraits
+					</TabsTrigger>
+					<TabsTrigger
+						value="popular"
+						className="hover:cursor-pointer"
+					>
+						Popular Styles
+					</TabsTrigger>
 				</TabsList>
 				<TabsContent
 					value="recent"
 					className="space-y-4"
 				>
-					<RecentPortraits />
+					<RecentPortraits outputImages={outputImages} />
 				</TabsContent>
 				<TabsContent
 					value="popular"
@@ -118,73 +139,8 @@ export default function DashboardPage() {
 					</div>
 				</TabsContent>
 			</Tabs>
-
-			<Card className="bg-gradient-to-r from-gray-900/90 to-purple-900/20 border-purple-800/50 shadow-xl">
-				<CardHeader>
-					<CardTitle>New! Text to Image</CardTitle>
-					<CardDescription>
-						Generate AI portraits using text prompts. Describe the portrait you
-						want to create.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div className="flex flex-col sm:flex-row gap-4 items-center">
-						<div className="space-y-2">
-							<div className="flex items-center gap-2">
-								<Wand2 className="h-4 w-4 text-purple-400" />
-								<span>Describe any portrait style</span>
-							</div>
-							<div className="flex items-center gap-2">
-								<Wand2 className="h-4 w-4 text-purple-400" />
-								<span>Control creativity and quality</span>
-							</div>
-							<div className="flex items-center gap-2">
-								<Wand2 className="h-4 w-4 text-purple-400" />
-								<span>Generate unlimited variations</span>
-							</div>
-						</div>
-						<Link
-							href="/dashboard/prompt"
-							className="sm:ml-auto"
-						>
-							<Button className="gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-								Try It Now <ArrowRight className="h-4 w-4" />
-							</Button>
-						</Link>
-					</div>
-				</CardContent>
-			</Card>
-
-			<Card className="bg-gradient-to-r from-purple-900/20 to-gray-900/90 border-purple-800/50 shadow-xl">
-				<CardHeader>
-					<CardTitle>Upgrade to Pro</CardTitle>
-					<CardDescription>
-						Get unlimited AI portraits, 30+ styles, high resolution downloads,
-						and more.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div className="flex flex-col sm:flex-row gap-4 items-center">
-						<div className="space-y-2">
-							<div className="flex items-center gap-2">
-								<Sparkles className="h-4 w-4 text-purple-400" />
-								<span>50 AI portraits per month</span>
-							</div>
-							<div className="flex items-center gap-2">
-								<Sparkles className="h-4 w-4 text-purple-400" />
-								<span>30 premium styles</span>
-							</div>
-							<div className="flex items-center gap-2">
-								<Sparkles className="h-4 w-4 text-purple-400" />
-								<span>High resolution downloads</span>
-							</div>
-						</div>
-						<Button className="sm:ml-auto gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-							Upgrade Now <ArrowRight className="h-4 w-4" />
-						</Button>
-					</div>
-				</CardContent>
-			</Card>
 		</ScrollArea>
 	);
-}
+};
+
+export default DashboardPage;
