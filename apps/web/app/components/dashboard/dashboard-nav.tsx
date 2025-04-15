@@ -15,8 +15,8 @@ import {
 	Settings,
 	CreditCard,
 	Menu,
-	ImageIcon,
 	Home,
+	Layers,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -33,9 +33,9 @@ const navItems: NavItem[] = [
 		icon: <Grid className="h-4 w-4" />,
 	},
 	{
-		title: "My Portraits",
-		href: "/dashboard/portraits",
-		icon: <ImageIcon className="h-4 w-4" />,
+		title: "Models",
+		href: "/dashboard/models",
+		icon: <Layers className="h-4 w-4" />,
 	},
 	{
 		title: "Prompt",
