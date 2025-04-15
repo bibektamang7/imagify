@@ -7,10 +7,6 @@ export function middleware(request: NextRequest) {
 
 	const authorizedApiRoute = ["/api/v1/users/login", "/api/v1/users/sign-up"];
 
-	if (pathname.startsWith("/dashboard")) {
-		console.log(token);
-		console.log(request.cookies);
-	}
 	if (
 		pathname.startsWith("/api") &&
 		!authorizedApiRoute.some((route) => pathname.startsWith(route)) &&

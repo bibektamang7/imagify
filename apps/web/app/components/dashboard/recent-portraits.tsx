@@ -4,18 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Download, Share, Eye } from "lucide-react";
-
-interface OutputImageProps {
-	id: string;
-	imageUrl: string;
-	modelId: string;
-	userId: string;
-	prompt: string;
-	status: string;
-	createdAt: Date;
-	isDownloaded: boolean;
-	tag: string;
-}
+import { OutputImageProps } from "@/types/outputImage";
 
 interface RecentPortraitsProps {
 	outputImages: OutputImageProps[];

@@ -14,9 +14,13 @@ import { StatsCards } from "@/components/dashboard/stats-cards";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getUserFromToken } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 const DashboardPage = async () => {
 	const decodedUser = await getUserFromToken();
+	if (!decodedUser) {
+		redirect("/sign-in");
+	}
 	const user = await prismaClient.user.findUnique({
 		where: {
 			id: decodedUser?.id,

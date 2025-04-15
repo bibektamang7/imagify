@@ -1,8 +1,16 @@
+import { getUserFromToken } from "@/lib/auth";
 import { prismaClient } from "db";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
+	const user = await getUserFromToken();
+	if (!user) {
+		return NextResponse.json(
+			{ success: false, message: "unauthorized access" },
+			{ status: 401 }
+		);
+	}
 	try {
 		const searchParams = request.nextUrl.searchParams;
 		const imageIds = searchParams.getAll("ids");
@@ -12,6 +20,10 @@ export async function GET(request: NextRequest) {
 		const imagesData = await prismaClient.outputImages.findMany({
 			where: {
 				id: { in: imageIds },
+				userId: user.id,
+				status: {
+					not: "Failed",
+				},
 			},
 			skip: parseInt(offset),
 			take: parseInt(limit),
