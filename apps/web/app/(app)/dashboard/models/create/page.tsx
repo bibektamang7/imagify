@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { CreateModelForm } from "@/components/models/create-model-form"
+import  CreateModelForm  from "@/components/models/create-model-form"
 
 export const metadata: Metadata = {
   title: "Create Model | PhotoAI",

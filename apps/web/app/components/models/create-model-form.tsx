@@ -1,8 +1,7 @@
 "use client";
 
 import type React from "react";
-
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
 	Card,
@@ -22,7 +21,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Loader2 } from "lucide-react";
+import { CloudUpload, Loader2 } from "lucide-react";
 import {
 	ModelTypeEnum,
 	EthnecityEnum,
@@ -30,8 +29,9 @@ import {
 	type ModelFormData,
 } from "@/types/model";
 
-export function CreateModelForm() {
+const CreateModelForm = () => {
 	const router = useRouter();
+	const fileRef = useRef<HTMLInputElement | null>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [formData, setFormData] = useState<ModelFormData>({
 		name: "",
@@ -120,6 +120,10 @@ export function CreateModelForm() {
 		} finally {
 			setIsSubmitting(false);
 		}
+	};
+
+	const handleUploadFile = () => {
+		fileRef.current?.click();
 	};
 
 	return (
@@ -260,25 +264,38 @@ export function CreateModelForm() {
 							</div>
 						</div>
 
-						{/* ZIP URL */}
 						<div className="space-y-2">
-							<Label htmlFor="zipUrl">
-								ZIP URL <span className="text-red-500">*</span>
+							<Label htmlFor="images">
+								Images<span className="text-red-500">*</span>
 							</Label>
+							<p className="text-xs text-gray-500">minimum 15 images</p>
+
+							<div
+								onClick={handleUploadFile}
+								className="hover:cursor-pointer w-full h-48 bg-gray-800 rounded-md flex items-center justify-center gap-2 flex-col"
+							>
+								<CloudUpload
+									className=""
+									size={24}
+								/>
+								<p className="text-gray-100">Upload a File</p>
+								<span className="text-sm text-gray-400">
+									Drag and drop files here
+								</span>
+							</div>
 							<Input
-								id="zipUrl"
-								name="zipUrl"
-								placeholder="Enter ZIP file URL"
-								value={formData.zipUrl}
+								ref={fileRef}
+								multiple
+								min={15}
+								max={20}
+								type="file"
+								id="images"
 								onChange={handleInputChange}
-								className="bg-gray-800 border-gray-700"
+								className="hidden"
 							/>
 							{errors.zipUrl && (
 								<p className="text-red-500 text-sm">{errors.zipUrl}</p>
 							)}
-							<p className="text-xs text-gray-500">
-								URL to the ZIP file containing model data
-							</p>
 						</div>
 
 						{/* Trigger Word */}
@@ -348,4 +365,5 @@ export function CreateModelForm() {
 			</form>
 		</Card>
 	);
-}
+};
+export default CreateModelForm;
