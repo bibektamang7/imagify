@@ -18,7 +18,7 @@ export default function DashboardLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="flex min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
+		<div className="flex max-h-screen overflow-hidden bg-gradient-to-b from-gray-950 to-gray-900">
 			<DashboardNav />
 			<ScrollArea className="flex-1 max-h-screen">
 				<DashboardHeader />

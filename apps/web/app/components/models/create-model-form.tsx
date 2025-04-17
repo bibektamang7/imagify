@@ -28,10 +28,14 @@ import {
 	EyeColorEnum,
 	type ModelFormData,
 } from "@/types/model";
+import { getSignedUrl, uploadFiles } from "@/lib/api";
+import { uploadFile } from "@/lib/r2";
+import JSZip from "jszip";
 
 const CreateModelForm = () => {
 	const router = useRouter();
 	const fileRef = useRef<HTMLInputElement | null>(null);
+	const [files, setFiles] = useState<File[]>([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [formData, setFormData] = useState<ModelFormData>({
 		name: "",
@@ -47,6 +51,11 @@ const CreateModelForm = () => {
 	const [errors, setErrors] = useState<
 		Partial<Record<keyof ModelFormData, string>>
 	>({});
+
+	const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const fileArray = Array.from(e.target.files as FileList);
+		setFiles((prev) => [...prev, ...fileArray]);
+	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -89,17 +98,12 @@ const CreateModelForm = () => {
 			newErrors.age = "Age must be between 18 and 100";
 		}
 
-		if (!formData.zipUrl.trim()) {
-			newErrors.zipUrl = "ZIP URL is required";
-		}
-
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
 		if (!validateForm()) {
 			return;
 		}
@@ -107,13 +111,19 @@ const CreateModelForm = () => {
 		setIsSubmitting(true);
 
 		try {
-			// In a real app, you would submit the form data to your API
-			console.log("Submitting model data:", formData);
+			const signedResponse = await getSignedUrl();
+			console.log(signedResponse);
 
-			// Simulate API call
-			await new Promise((resolve) => setTimeout(resolve, 1500));
+			const zip = new JSZip();
+			const fileNames: string[] = [];
 
-			// Redirect to models page
+			for (const file of files) {
+				zip.file(file.name, await file.arrayBuffer());
+				fileNames.push(file.name);
+			}
+			const content = await zip.generateAsync({ type: "blob" });
+			await uploadFiles(signedResponse.data.url, content);
+
 			router.push("/dashboard/models");
 		} catch (error) {
 			console.error("Error creating model:", error);
@@ -290,9 +300,10 @@ const CreateModelForm = () => {
 								max={20}
 								type="file"
 								id="images"
-								onChange={handleInputChange}
+								onChange={handleFileInputChange}
 								className="hidden"
 							/>
+							{files.length > 0 && <p>{files.length} images selected</p>}
 							{errors.zipUrl && (
 								<p className="text-red-500 text-sm">{errors.zipUrl}</p>
 							)}

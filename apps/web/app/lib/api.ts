@@ -48,3 +48,27 @@ export const getPortraits = async () => {
 		throw new Error(error.message);
 	}
 };
+
+export const getSignedUrl = async () => {
+	const response = await fetch(`${BASE_URL}/pre-signed-url`);
+	if (!response.ok) {
+		return response;
+	}
+
+	return response.json();
+};
+
+export const uploadFiles = async (url: string, content: Blob) => {
+	const response = await fetch(`${url}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/zip",
+		},
+		body: JSON.stringify(content),
+	});
+	if (!response.ok) {
+		return response;
+	}
+
+	return response.json();
+};
