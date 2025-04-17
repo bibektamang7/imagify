@@ -123,7 +123,7 @@ export default function Home() {
 												alt="Professional AI portrait of a woman with business attire"
 												className="rounded-lg object-cover"
 												height={300}
-												src="/placeholder.svg?height=300&width=250"
+												src="/1.jpg"
 												width={250}
 											/>
 										</div>
@@ -135,7 +135,7 @@ export default function Home() {
 												alt="Artistic AI portrait of a man with creative lighting"
 												className="rounded-lg object-cover"
 												height={300}
-												src="/placeholder.svg?height=300&width=250"
+												src="/2.jpg"
 												width={250}
 											/>
 										</div>
@@ -149,7 +149,7 @@ export default function Home() {
 												alt="Vintage style AI portrait with sepia tones"
 												className="rounded-lg object-cover"
 												height={300}
-												src="/placeholder.svg?height=300&width=250"
+												src="/3.jpg"
 												width={250}
 											/>
 										</div>
@@ -161,7 +161,7 @@ export default function Home() {
 												alt="Fantasy themed AI portrait with magical elements"
 												className="rounded-lg object-cover"
 												height={300}
-												src="/placeholder.svg?height=300&width=250"
+												src="/4.jpg"
 												width={250}
 											/>
 										</div>
@@ -370,7 +370,7 @@ export default function Home() {
 										style={{ transitionDelay: `${i * 0.05}s` }}
 									>
 										<Image
-											src={`/placeholder.svg?height=400&width=300&text=Example+${i + 1}`}
+											src={`/example${i + 1}.jpg`}
 											alt={`${item.style} style AI portrait - ${item.desc}`}
 											width={300}
 											height={400}
@@ -432,9 +432,9 @@ export default function Home() {
 								</h2>
 								<p className="mx-auto max-w-[700px] text-gray-400 md:text-xl/relaxed">
 									Join thousands of users creating stunning AI portraits with
-								Imagify	
+									Imagify
 								</p>
-								<Link href="/generate">
+								<Link href="/sign-up">
 									<Button
 										size="lg"
 										className="mt-4 gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg shadow-purple-900/20 animate-pulse"

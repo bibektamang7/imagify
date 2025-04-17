@@ -29,7 +29,6 @@ import {
 	type ModelFormData,
 } from "@/types/model";
 import { getSignedUrl, uploadFiles } from "@/lib/api";
-import { uploadFile } from "@/lib/r2";
 import JSZip from "jszip";
 
 const CreateModelForm = () => {
