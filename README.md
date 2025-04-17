@@ -1,6 +1,6 @@
-# Turborepo starter
+# Imagify 
 
-This Turborepo starter is maintained by the Turborepo core team.
+![Project Banner](./apps/web/public/landing-page.png)
 
 ## Using this example
 
